@@ -20,7 +20,11 @@ class BookController {
 
     @GetMapping
     List<Book> getAllBooks() {
-        List<Book> books = bookService.getAllBooks();
-        return books;
+        return bookService.getAllBooks();
+    }
+
+    @PostMapping
+    Long addBook(@RequestBody CreateBookDto createBookDto) {
+        return bookService.createBook(createBookDto).getId();
     }
 }

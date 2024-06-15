@@ -6,4 +6,6 @@ public interface BookService {
     Book getBookById(Long bookId);
 
     List<Book> getAllBooks();
+
+    Book createBook(CreateBookDto createBookDto);
 }

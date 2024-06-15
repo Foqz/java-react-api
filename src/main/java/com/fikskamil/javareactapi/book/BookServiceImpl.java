@@ -1,11 +1,18 @@
 package com.fikskamil.javareactapi.book;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 class BookServiceImpl implements BookService {
+
+    private final BookRepository bookRepository;
+
     @Override
     public Book getBookById(Long bookId) {
 
@@ -19,17 +26,16 @@ class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getAllBooks() {
-        return List.of(Book.builder()
-                        .title("test")
-                        .author("author")
-                        .isbn("qwe")
-                        .id(1L)
-                        .build(),
-                Book.builder()
-                        .title("test2")
-                        .author("author2")
-                        .isbn("qwe2")
-                        .id(1L)
-                        .build());
+        return bookRepository.findAll();
+    }
+
+    @Override
+    public Book createBook(CreateBookDto createBookDto) {
+        Book build = Book.builder()
+                .title(createBookDto.title())
+                .author(createBookDto.author())
+                .isbn(createBookDto.isbn())
+                .build();
+        return bookRepository.save(build);
     }
 }
