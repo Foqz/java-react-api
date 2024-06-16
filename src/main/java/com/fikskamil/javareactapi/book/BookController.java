@@ -32,4 +32,9 @@ class BookController {
     Long updateBook(@RequestBody CreateBookDto createBookDto, @PathVariable Long bookId) {
         return bookService.updateBook(createBookDto, bookId).getId();
     }
+
+    @DeleteMapping("{bookId}")
+    void deleteBook(@PathVariable Long bookId) {
+        bookService.deleteBook(bookId);
+    }
 }

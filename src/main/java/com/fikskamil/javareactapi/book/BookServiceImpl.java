@@ -53,4 +53,9 @@ class BookServiceImpl implements BookService {
             throw new RuntimeException("Book not found");
         }
     }
+
+    @Override
+    public void deleteBook(Long bookId) {
+        bookRepository.deleteById(bookId);
+    }
 }
